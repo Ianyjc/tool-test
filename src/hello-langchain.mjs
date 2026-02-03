@@ -11,5 +11,14 @@ const model = new ChatOpenAI({
   },
 });
 
-const response = await model.invoke("介绍下自己");
-console.log(response.content);
+const stream = await model.stream("介绍下自己");
+let fullContent = '';
+
+console.log("📡 接收流式数据:\n");
+
+for await(const chunk of stream) {
+    const content = chunk.content;
+    fullContent += content;
+
+    process.stdout.write(content); // 实时显示流式文本
+}

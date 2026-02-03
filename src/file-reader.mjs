@@ -11,7 +11,7 @@ import { z } from "zod";
 
 /** 初始化模型 */
 const model = new ChatOpenAI({
-  modelName: process.env.MODEL_NAME,
+  modelName: 'qwen-plus',
   apiKey: process.env.OPENAI_API_KEY,
   temperature: 0,
   configuration: {
@@ -52,7 +52,7 @@ const messages = [
     可用工具：
     - read_file: 读取文件内容（使用此工具来获取文件内容）
 `),
-  new HumanMessage("请读取 src/file-reader.mjs 文件内容并解释代码"),
+  new HumanMessage("请读取 ./src/file-reader.mjs 文件内容并解释代码"),
 ];
 
 let response = await modelWithTools.invoke(messages);
